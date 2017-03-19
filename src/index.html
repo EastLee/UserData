@@ -13,12 +13,12 @@
         <input class="userData" type="text" id="oPersistInput" />
         <input type="button" value="load" onclick="fnLoadInput()" />
         <input type="button" value="save" onclick="fnSaveInput()" />
+        <input type="button" value="remove" onclick="fnRemoveInput()" />
     </form>
     <script>
         var UserData = {
             userData: null,
-            //name : location.hostname,
-            //this.name = "css88.com";
+            name : 'name',
             init: function() {
                 if (!UserData.userData) {
                     try {
@@ -71,6 +71,12 @@
             UserData.setItem("c", "cccccccc");
 
         };
+
+        var fnRemoveInput = function(){
+            UserData.remove("a", "aaaaaaaa");
+            UserData.remove("b", "bbbbbbbb");
+            UserData.remove("c", "cccccccc");
+        }
     </script>
 </body>
 
