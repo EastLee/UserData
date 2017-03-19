@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="oPersistForm">
+        <input class="userData" type="text" id="oPersistInput" />
+        <input type="button" value="load" onclick="fnLoadInput()" />
+        <input type="button" value="save" onclick="fnSaveInput()" />
+    </form>
+    <script>
+        var UserData = {
+            userData: null,
+            //name : location.hostname,
+            //this.name = "css88.com";
+            init: function() {
+                if (!UserData.userData) {
+                    try {
+                        UserData.userData = document.createElement('INPUT');
+                        UserData.userData.type = "hidden";
+                        UserData.userData.style.display = "none";
+                        UserData.userData.addBehavior("#default#userData");
+
+                        document.body.appendChild(UserData.userData);
+                        var expires = new Date();
+                        expires.setDate(expires.getDate() + 365);
+                        UserData.userData.expires = expires.toUTCString();
+                    } catch (e) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            setItem: function(key, value) {
+                if (UserData.init()) {
+                    UserData.userData.load(UserData.name);
+                    UserData.userData.setAttribute(key, value);
+                    UserData.userData.save(UserData.name);
+                }
+            },
+            getItem: function(key) {
+                if (UserData.init()) {
+                    UserData.userData.load(UserData.name);
+                    return UserData.userData.getAttribute(key)
+                }
+            },
+            remove: function(key) {
+                if (UserData.init()) {
+                    UserData.userData.load(UserData.name);
+                    UserData.userData.removeAttribute(key);
+                    UserData.userData.save(UserData.name);
+                }
+            }
+        };
+
+        var fnLoadInput = function() {
+            alert(UserData.getItem("a"));
+            alert(UserData.getItem("b"));
+            alert(UserData.getItem("c"));
+        };
+
+        var fnSaveInput = function() {
+            UserData.setItem("a", "aaaaaaaa");
+            UserData.setItem("b", "bbbbbbbb");
+            UserData.setItem("c", "cccccccc");
+
+        };
+    </script>
+</body>
+
+</html>
